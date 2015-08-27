@@ -1,0 +1,20 @@
+{
+  "name": "falcor-demo",
+  "version": "1.0.0",
+  "description": "Demo code for Auth0's Falcor article",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "falcor"
+  ],
+  "author": "Ryan Chenkie",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "falcor": "^0.1.12",
+    "falcor-express": "^0.1.2",
+    "falcor-router": "^0.2.9"
+  }
+}

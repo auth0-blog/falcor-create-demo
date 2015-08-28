@@ -72,7 +72,7 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function(req, res) {
       // are used as eventIds
       route: "events[{integers:eventIds}]['name', 'description', 'location']",
       get: function(pathSet) {
-        
+
         var results = [];
 
         // Above we specified an eventIds identifier that is an
@@ -88,8 +88,38 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function(req, res) {
             // Finally we push a path/value object onto
             // the results array
             results.push({
-              path: ['events', eventId, key], 
+              path: ['events', eventId, key],
               value: eventRecord[key]
+            });
+          });
+        });
+
+        return results;
+      }
+    },
+    {
+      // Our route needs to match a pattern of integers that
+      // are used as locationId
+      route: "locationsById[{integers:locationId}]['city', 'state']",
+      get: function(pathSet) {
+        
+        var results = [];
+
+        // Above we specified an locationId identifier that is an
+        // array of ids which we can loop over
+        pathSet.locationId.forEach(function(locationId) {
+
+          // Next, an array of key names that map is held at pathSet[2]
+          pathSet[2].map(function(key) {
+
+            // We find the event the cooresponds to the current locationId
+            var location = eventsData.locationsById[locationId];
+
+            // Finally we push a path/value object onto
+            // the results array
+            results.push({
+              path: ['locationsById', locationId, key], 
+              value: location[key]
             });
           });          
         });

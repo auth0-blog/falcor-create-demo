@@ -134,6 +134,7 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function(req, res) {
       get: function(pathSet) {
         
         var results = [];
+        var idx = 0;
 
         // We want to loop over each of the conference names provided
         pathSet[2].forEach(function(name) {
@@ -143,7 +144,7 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function(req, res) {
           eventsData.events.forEach(function(event) {
             if(_.contains(event, name)) {
               results.push({
-                path: ['events','byName', key, 'description'],
+                path: ['events','byName', idx++, 'description'],
                 value: event.description                
               });
             }

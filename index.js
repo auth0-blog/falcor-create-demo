@@ -102,7 +102,7 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function(req, res) {
       // are used as locationId
       route: "locationsById[{integers:locationId}]['city', 'state']",
       get: function(pathSet) {
-        
+
         var results = [];
 
         // Above we specified an locationId identifier that is an
@@ -118,38 +118,35 @@ app.use('/model.json', falcorExpress.dataSourceRoute(function(req, res) {
             // Finally we push a path/value object onto
             // the results array
             results.push({
-              path: ['locationsById', locationId, key], 
+              path: ['locationsById', locationId, key],
               value: location[key]
             });
-          });          
+          });
         });
 
-        return results; 
-      }      
+        return results;
+      }
     },
     {
       // The search route will match keys that match the names
       // of our conferences
       route: "events.byName[{keys}]['description']",
       get: function(pathSet) {
-        
-        var results = [];
 
+        var results = [];
         // We want to loop over each of the conference names provided
         pathSet[2].forEach(function(name) {
-
           // We also want to loop over all the events on the data object
           // and check if conference name is there
           eventsData.events.forEach(function(event) {
             if(_.contains(event, name)) {
               results.push({
-                path: ['events','byName', key, 'description'],
-                value: event.description                
+                path: ['events','byName', name, 'description'],
+                value: event.description
               });
             }
-          });          
+          });
         });
-
         return results;
       }
     }

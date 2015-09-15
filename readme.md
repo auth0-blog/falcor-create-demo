@@ -1,6 +1,6 @@
 # Falcor Demo
 
-This is the code for Auth0's [Intro to Falcor article](#). In the tutorial, we cover how to:
+This is the code for Auth0's [Getting Started With Falcor](https://auth0.com/blog/2015/08/28/getting-started-with-falcor/) blog post. In the tutorial, we cover how to:
 
 1. Setup a Falcor model on the client and prime it with data
 2. Use Falcor's JSON Graph to avoid having duplicate data

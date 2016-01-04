@@ -15,6 +15,7 @@
     "express": "^4.13.3",
     "falcor": "^0.1.12",
     "falcor-express": "^0.1.2",
-    "falcor-router": "^0.2.9"
+    "falcor-router": "^0.2.9",
+    "lodash": "^3.10.1"
   }
 }

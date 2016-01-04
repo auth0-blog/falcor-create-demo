@@ -14,7 +14,7 @@ isn't duplicated.
 
 Step 3: We move the data over to the
 server to be served from a Falcor Router.
-This step is currently setup to run but 
+This step is currently setup to run but
 you can comment it out and start from
 Step 1 by uncommenting the appropriate
 pieces.
@@ -54,30 +54,30 @@ pieces.
 //         location: { city: "Walker Creek Ranch", state: "California" }
 //       }
 //     ]
-//   }  
+//   }
 // });
 
 // model
 //   We want the name and description values for the first three items
 //   from the data model
-//   .get(["events", {from: 0, to: 2}, ["name", "description"]])
+// .get(["events", {from: 0, to: 2}, ["name", "description"]])
 //   To get the values on the "location" object, we need to pass the paths for the
 //   keys on that object
-//   .get(["events", {from: 0, to: 2}, ["name", "description", "location"],["city", "state"]])
-//   .then(function(response) {
-//     document.getElementById("event-data").innerHTML = JSON.stringify(response, null, 2);
-//   });
+  // .get(["events", {from: 0, to: 2}, ["name", "description", "location"],["city", "state"]])
+  // .then(function(response) {
+  //   document.getElementById("event-data").innerHTML = JSON.stringify(response, null, 2);
+  // });
 
 // model
-      // We set the value of the first occurrence of Utah to UT
+//       // We set the value of the first occurrence of Utah to UT
 //   .set(falcor.pathValue(["events", 0, "location", "state"], 'UT'))
 //   .then(function(response) {
 //     model
-          // What we find afterwards is that the value gets changed in one location, but not both.
+//     // What we find afterwards is that the value gets changed in one location, but not both.
 //       .get(["events", {from: 0, to: 2}, ["name", "description", "location"],["city", "state"]])
 //       .then(function(response) {
 //         document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
-//       });    
+//       });
 //   });
 
 
@@ -85,7 +85,7 @@ pieces.
 
 // We can use the shorthand for references with a variable
 // var $ref = falcor.Model.ref;
-
+//
 // var model = new falcor.Model({
 //   cache: {
 //     locationsById: {
@@ -133,19 +133,19 @@ pieces.
 //         location: $ref('locationsById[4]')
 //       }
 //     ]
-//   }  
+//   }
 // });
-
+//
 
 // model
-      // Now when we set Utah to UT for the first occurrence, it is changed everywhere else 
+//   // Now when we set Utah to UT for the first occurrence, it is changed everywhere else
 //   .set(falcor.pathValue(["events", 0, "location", "state"], 'UT'))
 //   .then(function(response) {
 //     model
 //       .get(["events", {from: 0, to: 2}, ["name", "description", "location"],["city", "state"]])
 //       .then(function(response) {
 //         document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
-//       });    
+//       });
 //   });
 
 
@@ -154,17 +154,27 @@ pieces.
 // We can set the model to have a data source that is retrieved from the backend
 // over HTTP by setting the soure to be a falcor.HttpDataSource.
 var model = new falcor.Model({source: new falcor.HttpDataSource('/model.json')});
-
-model
-  .get(["events", {from: 0, to: 2}, ["name", "description"]])
-  .then(function(response) {
-    document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
-  });
+  // .get(["events", {from: 0, to: 2}, ["name", "description"]])
+  // .get([
+  //   "events", {from: 0, to: 2}, ["name", "description"]
+  // ],
+  // [
+  //   'events', {from: 0, to: 2}, 'location', ['city', 'state']
+  // ])
+// model
+//   .get(["events", {from: 0, to: 2}, ["name", "description", "location"],["city", "state"]])
+//
+//   .then(function(response) {
+//     document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
+//   });
 
 // Search example - we pass "Midwest JS" which will be looked up
 // in the events data on the server and sent back if it exists
-// model
-//   .get(["events", "byName", ["Midwest JS"], ['description']])
-//   .then(function(response) {
-//     document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
-//   });  
+model
+  .get(["events", "byName", ["Midwest JS"], ['description']])
+  .then(function(response) {
+    document.getElementById('event-data').innerHTML = JSON.stringify(response, null, 2);
+  }, function(err) {
+    console.log(err);
+    // console.log(err['0'].value.message);
+  });
